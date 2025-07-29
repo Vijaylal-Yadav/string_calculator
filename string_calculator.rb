@@ -14,6 +14,9 @@ class StringCalculator
 
     input = input.gsub("\n", delimiter)
     numbers = input.split(delimiter)
+
+    raise "negative numbers not allowed #{numbers[0]}" if numbers[0].to_i < 0
+
     numbers.inject(0) { |sum, number| sum + number.to_i }
   end
 end
