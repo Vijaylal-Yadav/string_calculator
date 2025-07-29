@@ -35,5 +35,17 @@ RSpec.describe StringCalculator do
       expect(calculator.add("1,2\n3")).to eq(6)
       expect(calculator.add("1,2,3")).to eq(6)
     end
+
+    it "returns the sum for numbers separated by a custom delimiter (pipe)" do
+      expect(StringCalculator.new.add("//|\n5|5|5")).to eq(15)
+    end
+
+    it "returns the sum for numbers separated by a custom delimiter (;)" do
+      expect(StringCalculator.new.add("//;\n5;5;5")).to eq(15)
+    end
+
+    it "returns the sum for numbers separated by a custom delimiter ($)" do
+      expect(StringCalculator.new.add("//$\n5$5$5$5")).to eq(20)
+    end
   end
 end
