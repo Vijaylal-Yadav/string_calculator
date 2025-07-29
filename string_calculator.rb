@@ -1,26 +1,32 @@
 require 'byebug'
 class StringCalculator
+  attr_accessor :input
   def add(input)
-    return 0 if input.empty?
+    @input = input
 
-    input.to_i if input.size == 1
+    @numbers = retreive_numbers_from_string
 
-    delimiter = ","
+    raise_error_if_negative_numbers_present!
 
-    if input[0..1] == "//"
-      delimiter = input[2]
-      input = input.gsub("//", "")
-    end
-
-    input = input.gsub("\n", delimiter)
-    numbers = input.split(delimiter)
-
-    raise "negative numbers not allowed #{negative_numbers(numbers).join(',')}" unless negative_numbers(numbers).empty?
-
-    numbers.inject(0) { |sum, number| sum + number.to_i }
+    @numbers.inject(0) { |sum, number| sum + number.to_i }
   end
 
-  def negative_numbers(numbers)
-    numbers.select { |number| number.to_i < 0 }
+  def raise_error_if_negative_numbers_present!
+    raise "negative numbers not allowed #{negative_numbers.join(',')}" unless negative_numbers.empty?
+  end
+  def negative_numbers
+    @numbers.select { |number| number.to_i < 0 }
+  end
+
+  def retreive_numbers_from_string
+    delimiter = ","
+
+    if @input[0..1] == "//"
+      delimiter = @input[2]
+      @input = @input.gsub("//", "")
+    end
+
+    @input = @input.gsub("\n", delimiter)
+    @input.split(delimiter).reject(&:empty?)
   end
 end
