@@ -47,5 +47,13 @@ RSpec.describe StringCalculator do
     it "returns the sum for numbers separated by a custom delimiter ($)" do
       expect(StringCalculator.new.add("//$\n5$5$5$5")).to eq(20)
     end
+
+    context "when negative numbers are present in string" do
+      it "should raise an exception if first number is negative numbers" do
+        expect{
+          StringCalculator.new.add("-5,5")
+        }.to raise_error(RuntimeError, "negative numbers not allowed -5")
+      end
+    end
   end
 end
