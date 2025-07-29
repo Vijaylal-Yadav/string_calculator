@@ -15,8 +15,12 @@ class StringCalculator
     input = input.gsub("\n", delimiter)
     numbers = input.split(delimiter)
 
-    raise "negative numbers not allowed #{numbers[0]}" if numbers[0].to_i < 0
+    raise "negative numbers not allowed #{negative_numbers(numbers).join(',')}" unless negative_numbers(numbers).empty?
 
     numbers.inject(0) { |sum, number| sum + number.to_i }
+  end
+
+  def negative_numbers(numbers)
+    numbers.select { |number| number.to_i < 0 }
   end
 end
