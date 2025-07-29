@@ -54,6 +54,12 @@ RSpec.describe StringCalculator do
           StringCalculator.new.add("-5,5")
         }.to raise_error(RuntimeError, "negative numbers not allowed -5")
       end
+
+      it "should raise an exception if negative number is present anywhere in string" do
+        expect{
+          StringCalculator.new.add("5,6,-5")
+        }.to raise_error(RuntimeError, "negative numbers not allowed -5")
+      end
     end
   end
 end
