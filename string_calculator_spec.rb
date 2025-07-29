@@ -27,5 +27,13 @@ RSpec.describe StringCalculator do
     it "sums five numbers separated by a comma" do
       expect(StringCalculator.new.add("15,5,6,20,40")).to eq(86)
     end
+
+    it "returns the sum for numbers separated by a new line(\n) delimiter" do
+      calculator = StringCalculator.new
+      expect(calculator.add("1\n2,3")).to eq(6)
+      expect(calculator.add("1\n2\n3")).to eq(6)
+      expect(calculator.add("1,2\n3")).to eq(6)
+      expect(calculator.add("1,2,3")).to eq(6)
+    end
   end
 end
