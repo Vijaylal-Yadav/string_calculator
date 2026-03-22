@@ -22,4 +22,4 @@ Example:
 ```ruby
 calculator = StringCalculator.new
 result = calculator.add("1,2,3")
-puts result # Output: 6
+puts result # Output: 9
